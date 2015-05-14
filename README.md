@@ -1,1 +1,1 @@
-# installer_testing
+# GoCD installer tests
