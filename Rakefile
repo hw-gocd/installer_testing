@@ -364,7 +364,10 @@ end
 
 def set_server_host_ip_in_dockerfile dockerfile_path ,host_ip
   Dir.chdir(dockerfile_path) do
-    IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/server_ip/, "#{host_ip}")})
+    #IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/server_ip/, "#{host_ip}")})
+    original_dockerfile = File.read("Dockerfile")
+    new_dockerfile = original_dockerfile.gsub(/server_ip/, "#{host_ip}")
+    File.open("Dockerfile", "w") {|f| f.write(new_dockerfile)}
   end
 end
 
@@ -385,7 +388,10 @@ end
 
 def cleanup_server_ip_from_dockerfile dockerfile_path
  Dir.chdir(dockerfile_path) do
-  IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/\d+\.\d+\.\d+\.\d+/, 'server_ip')})
+   #IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/\d+\.\d+\.\d+\.\d+/, 'server_ip')})
+   original_dockerfile = File.read("Dockerfile")
+   new_dockerfile = original_dockerfile.gsub(/\d+\.\d+\.\d+\.\d+/, 'server_ip')
+   File.open("Dockerfile", "w") {|f| f.write(new_dockerfile)}
  end
 end
 
@@ -413,16 +419,20 @@ end
 
 def set_go_installer_version_in_dockerfile dockerfile_path ,go_version
   Dir.chdir(dockerfile_path) do
-    IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/\[go-version-under-test\]/, "#{go_version}")})
+    #IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/\[go-version-under-test\]/, "#{go_version}")})
+    original_dockerfile = File.read("Dockerfile")
+    new_dockerfile = original_dockerfile.gsub(/\[go-version-under-test\]/, "#{go_version}")
+    File.open("Dockerfile", "w") {|f| f.write(new_dockerfile)}
   end
-
 end
 
 
 def cleanup_go_installer_version_from_dockerfile dockerfile_path
   Dir.chdir(dockerfile_path) do
-    IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/(\d+){2}\.\d+\.\d+-(\d+){4}/, '[go-version-under-test]')})
-  end
+    #IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/(\d+){2}\.\d+\.\d+-(\d+){4}/, '[go-version-under-test]')})
+    original_dockerfile = File.read("Dockerfile")
+    new_dockerfile = original_dockerfile.gsub(/(\d+){2}\.\d+\.\d+-(\d+){4}/, '[go-version-under-test]')
+    File.open("Dockerfile", "w") {|f| f.write(new_dockerfile)}  end
 end
 
 
@@ -439,15 +449,20 @@ end
 
 def set_postgres_jar_version_in_dockerfile dockerfile_path ,postgres_version
   Dir.chdir(dockerfile_path) do
-    IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/\[postgres-version-under-test\]/, "#{postgres_version}")})
+    #IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/\[postgres-version-under-test\]/, "#{postgres_version}")})
+    original_dockerfile = File.read("Dockerfile")
+    new_dockerfile = original_dockerfile.gsub(/\[postgres-version-under-test\]/, "#{postgres_version}")
+    File.open("Dockerfile", "w") {|f| f.write(new_dockerfile)}
   end
-
 end
 
 
 def cleanup_postgres_jar_version_from_dockerfile dockerfile_path
   Dir.chdir(dockerfile_path) do
-    IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/(\d+){2}\.\d+\.\d+-(\d+)\.jar/, '[postgres-version-under-test].jar')})
+    #IO.write( "Dockerfile" , File.open("Dockerfile") {|f| f.read.gsub(/(\d+){2}\.\d+\.\d+-(\d+)\.jar/, '[postgres-version-under-test].jar')})
+    original_dockerfile = File.read("Dockerfile")
+    new_dockerfile = original_dockerfile.gsub(/(\d+){2}\.\d+\.\d+-(\d+)\.jar/, '[postgres-version-under-test].jar')
+    File.open("Dockerfile", "w") {|f| f.write(new_dockerfile)}
   end
 end
 
